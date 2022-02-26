@@ -1,11 +1,8 @@
 package io.lana.ejb.lib.pageable;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 public class Page<T> {
     private final List<T> data;
     private final PageMeta meta;
@@ -15,7 +12,14 @@ public class Page<T> {
         this.data = new ArrayList<>(data);
     }
 
-    @Getter
+    public List<T> getData() {
+        return data;
+    }
+
+    public PageMeta getMeta() {
+        return meta;
+    }
+
     public static class PageMeta {
         private final String sort;
         private final int size;
@@ -34,6 +38,26 @@ public class Page<T> {
         public static PageMeta from(Pageable pageable, long count) {
             int totalPages = (int) Math.ceil((double) count / pageable.getSize());
             return new PageMeta(pageable.getSort(), pageable.getSize(), pageable.getPage(), totalPages, count);
+        }
+
+        public String getSort() {
+            return sort;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public int getCurrentPage() {
+            return currentPage;
+        }
+
+        public int getTotalPages() {
+            return totalPages;
+        }
+
+        public long getTotalElements() {
+            return totalElements;
         }
     }
 
