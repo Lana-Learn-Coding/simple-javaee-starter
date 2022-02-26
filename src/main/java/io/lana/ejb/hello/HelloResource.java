@@ -5,7 +5,6 @@ import io.lana.ejb.lib.servlet.ServletContext;
 import io.lana.ejb.lib.servlet.Viewable;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,7 +27,6 @@ public class HelloResource {
     @GET
     @Path("/entity")
     @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
     public Response hello() {
         HelloEntity entity = repo.save(new HelloEntity());
         return Response.ok(entity).build();
