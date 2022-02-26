@@ -1,10 +1,9 @@
 package io.lana.ejb;
 
-import io.lana.ejb.lib.ViewableResource;
+import io.lana.ejb.lib.ServletContext;
 import org.glassfish.jersey.server.mvc.Viewable;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -12,14 +11,14 @@ import javax.ws.rs.core.Response;
 import java.util.Collections;
 
 @Path("/hello-servlet")
-public class HelloResource extends ViewableResource {
-    @PersistenceContext
-    private EntityManager em;
+public class HelloResource {
+    @Inject
+    private ServletContext context;
 
     @GET
     @Produces(MediaType.TEXT_HTML)
     public Viewable hello(@QueryParam("name") @DefaultValue("World") final String name) {
-        return new Viewable("/hello.jsp", Collections.singletonMap("name", name));
+        return new Viewable("/views/hello.jsp", Collections.singletonMap("name", name));
     }
 
     @GET
@@ -28,8 +27,8 @@ public class HelloResource extends ViewableResource {
     @Transactional
     public Response hello() {
         HelloEntity entity = new HelloEntity();
-        em.persist(entity);
-        em.flush();
+        context.em().persist(entity);
+        context.em().flush();
         return Response.ok(entity).build();
     }
 }

@@ -8,7 +8,7 @@
         <filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>io.lana.ejb.Config</param-value>
+            <param-value>io.lana.ejb.lib.conf.JerseyConfig</param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.server.mvc.templateBasePath</param-name>
@@ -17,6 +17,10 @@
         <init-param>
             <param-name>jersey.config.servlet.filter.forwardOn404</param-name>
             <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>jersey.config.servlet.filter.contextPath</param-name>
+            <param-value>/</param-value>
         </init-param>
     </filter>
     <filter-mapping>
