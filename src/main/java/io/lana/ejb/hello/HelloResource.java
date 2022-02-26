@@ -1,6 +1,5 @@
-package io.lana.ejb;
+package io.lana.ejb.hello;
 
-import io.lana.ejb.lib.ServletContext;
 import org.glassfish.jersey.server.mvc.Viewable;
 
 import javax.inject.Inject;
@@ -13,7 +12,7 @@ import java.util.Collections;
 @Path("/hello-servlet")
 public class HelloResource {
     @Inject
-    private ServletContext context;
+    private HelloRepo repo;
 
     @GET
     @Produces(MediaType.TEXT_HTML)
@@ -26,9 +25,7 @@ public class HelloResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response hello() {
-        HelloEntity entity = new HelloEntity();
-        context.em().persist(entity);
-        context.em().flush();
+        HelloEntity entity = repo.save(new HelloEntity());
         return Response.ok(entity).build();
     }
 }

@@ -1,4 +1,4 @@
-package io.lana.ejb;
+package io.lana.ejb.hello;
 
 import lombok.Getter;
 import lombok.Setter;
