@@ -1,6 +1,8 @@
 package io.lana.ejb.hello;
 
-import org.glassfish.jersey.server.mvc.Viewable;
+
+import io.lana.ejb.lib.servlet.ServletContext;
+import io.lana.ejb.lib.servlet.Viewable;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -12,12 +14,15 @@ import java.util.Collections;
 @Path("/hello-servlet")
 public class HelloResource {
     @Inject
+    private ServletContext context;
+
+    @Inject
     private HelloRepo repo;
 
     @GET
     @Produces(MediaType.TEXT_HTML)
     public Viewable hello(@QueryParam("name") @DefaultValue("World") final String name) {
-        return new Viewable("/views/hello.jsp", Collections.singletonMap("name", name));
+        return context.view("/hello.jsp", Collections.singletonMap("name", name));
     }
 
     @GET

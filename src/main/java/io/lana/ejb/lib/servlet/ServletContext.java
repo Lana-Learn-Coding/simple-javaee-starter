@@ -1,4 +1,4 @@
-package io.lana.ejb.lib;
+package io.lana.ejb.lib.servlet;
 
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
@@ -26,5 +26,13 @@ public class ServletContext {
 
     public HttpServletRequest req() {
         return req;
+    }
+
+    public Viewable view(String templateName) {
+        return new Viewable("/views" + templateName);
+    }
+
+    public Viewable view(String templateName, Object model) {
+        return new Viewable("/views" + templateName, model);
     }
 }
