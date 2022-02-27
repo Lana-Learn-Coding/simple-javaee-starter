@@ -14,19 +14,14 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-public class JpaRepository<T> implements CrudRepository<T> {
+public abstract class JpaRepository<T> implements CrudRepository<T> {
     private final Class<T> clazz;
 
     @PersistenceContext
     protected EntityManager em;
 
-    protected JpaRepository(Class<T> clazz) {
-        this.clazz = clazz;
-    }
-
-    public JpaRepository(Class<T> clazz, EntityManager em) {
-        this.em = em;
-        this.clazz = clazz;
+    protected JpaRepository() {
+        this.clazz = ModelUtils.getGenericType(ModelUtils.getOriginalClass(this));
     }
 
     @Override
