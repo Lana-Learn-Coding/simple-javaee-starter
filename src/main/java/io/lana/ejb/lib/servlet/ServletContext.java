@@ -3,6 +3,7 @@ package io.lana.ejb.lib.servlet;
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.ServerErrorException;
 import javax.ws.rs.core.Context;
 
 @RequestScoped
@@ -34,5 +35,21 @@ public class ServletContext {
 
     public Viewable view(String templateName, Object model) {
         return new Viewable("/views" + templateName, model);
+    }
+
+    public void forward(String templateName) {
+        try {
+            req.getRequestDispatcher("/WEB-INF/views" + templateName).forward(req, res);
+        } catch (Exception e) {
+            throw new ServerErrorException(500, e);
+        }
+    }
+
+    public void redirect(String path) {
+        try {
+            res.sendRedirect(path);
+        } catch (Exception e) {
+            throw new ServerErrorException(500, e);
+        }
     }
 }
