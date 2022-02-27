@@ -5,7 +5,7 @@ public class StringUtils {
     }
 
     public static boolean isNotBlank(final CharSequence cs) {
-        return isBlank(cs);
+        return !isBlank(cs);
     }
 
     public static boolean isBlank(final CharSequence cs) {

@@ -154,12 +154,12 @@ public class JpaRepository<T> implements CrudRepository<T> {
         if (StringUtils.startsWith(jpql, "select")) {
             jpql = jpql.replaceFirst("(select).+?(?=from)", "");
         }
-        return "select count(*) " + buildJPQL(jpql);
+        return "select count(it) " + buildJPQL(jpql);
     }
 
     @Override
     public long count() {
-        TypedQuery<Long> query = em().createQuery("select count(*) from " + clazz.getSimpleName() + " entity", Long.class);
+        TypedQuery<Long> query = em().createQuery("select count(it) from " + clazz.getSimpleName() + " it", Long.class);
         query.setMaxResults(1);
         return Optional.ofNullable(query.getSingleResult()).orElse(0L);
     }
@@ -181,7 +181,7 @@ public class JpaRepository<T> implements CrudRepository<T> {
         if (StringUtils.startsWithAny(jpql, "select", "from")) {
             return jpql;
         }
-        String built = "from " + clazz.getSimpleName() + " " + clazz.getSimpleName().toLowerCase();
+        String built = "from " + clazz.getSimpleName() + " it";
         if (StringUtils.isBlank(jpql)) return built;
         if (StringUtils.startsWith(jpql, "where")) return built + " " + jpql;
         return built + " where " + jpql;
