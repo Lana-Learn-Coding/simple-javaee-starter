@@ -4,7 +4,7 @@
 <layout:base>
     <jsp:attribute name="title">Hello Program</jsp:attribute>
     <jsp:attribute name="body">
-        <a href="/hello-servlet">Hello Servlet</a>
+        <a href="/customers">Customer App</a>
     </jsp:attribute>
 </layout:base>
 
