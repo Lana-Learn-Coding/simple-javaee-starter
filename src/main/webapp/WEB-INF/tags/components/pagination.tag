@@ -1,5 +1,5 @@
 <%@ tag body-content="empty" %>
-<%@ attribute name="pageMeta" required="true" type="io.lana.ejb.lib.pageable.Page.PageMeta" %>
+<%@ attribute name="pageMeta" required="true" type="io.lana.ejb.lib.pageable.PageMeta" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:url var="url" value="">
