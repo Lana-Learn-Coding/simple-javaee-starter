@@ -1,0 +1,35 @@
+package io.lana.ejb.bus;
+
+import io.lana.ejb.lib.servlet.AbstractJsonController;
+import io.lana.ejb.lib.servlet.ServletContext;
+import io.lana.ejb.lib.servlet.Viewable;
+
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+@Path("/bus")
+public class BusRideController extends AbstractJsonController<BusRide, Integer> {
+    @Inject
+    private ServletContext context;
+
+    @Inject
+    protected BusRideController(BusRideRepo repo) {
+        super(repo);
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public Viewable index() {
+        return context.view("/bus/index.jsp");
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response all() {
+        return Response.ok(repo.list()).build();
+    }
+}

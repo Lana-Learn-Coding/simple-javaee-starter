@@ -5,6 +5,7 @@
     <jsp:attribute name="title">Hello Program</jsp:attribute>
     <jsp:attribute name="body">
         <a href="/customers">Customer App</a>
+        <a href="/bus">Bus Ride App</a>
     </jsp:attribute>
 </layout:base>
 
