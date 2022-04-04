@@ -6,9 +6,11 @@
     <persistence-unit name="default" transaction-type="JTA">
         <jta-data-source>java:app/jdbc/db</jta-data-source>
         <properties>
-            <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.H2Platform"/>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="javax.persistence.sql-load-script-source" value="/db/init.sql"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
+            <property name="hibernate.hbm2ddl.import_files_sql_extractor" value="org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor"/>
         </properties>
     </persistence-unit>
 </persistence>
