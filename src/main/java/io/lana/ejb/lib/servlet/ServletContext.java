@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.ServerErrorException;
 import javax.ws.rs.core.Context;
 
+@Deprecated
 @RequestScoped
 public class ServletContext {
     @Context
@@ -30,11 +31,11 @@ public class ServletContext {
     }
 
     public Viewable view(String templateName) {
-        return new Viewable("/views" + templateName);
+        return new Viewable(templateName);
     }
 
     public Viewable view(String templateName, Object model) {
-        return new Viewable("/views" + templateName, model);
+        return new Viewable(templateName, model);
     }
 
     public void forward(String templateName) {

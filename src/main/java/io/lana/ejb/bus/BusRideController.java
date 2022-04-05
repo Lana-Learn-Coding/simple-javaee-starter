@@ -1,7 +1,6 @@
 package io.lana.ejb.bus;
 
 import io.lana.ejb.lib.servlet.AbstractJsonController;
-import io.lana.ejb.lib.servlet.ServletContext;
 import io.lana.ejb.lib.servlet.Viewable;
 
 import javax.inject.Inject;
@@ -15,17 +14,14 @@ import javax.ws.rs.core.Response;
 @Path("/bus")
 public class BusRideController extends AbstractJsonController<BusRide, Integer> {
     @Inject
-    private ServletContext context;
-
-    @Inject
     protected BusRideController(BusRideRepo repo) {
         super(repo);
     }
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public Viewable index() {
-        return context.view("/bus/index.jsp");
+    public Viewable view() {
+        return new Viewable("/bus/index.jsp");
     }
 
     @GET

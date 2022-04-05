@@ -4,10 +4,6 @@ public class StringUtils {
     private StringUtils() {
     }
 
-    public static boolean isNotBlank(final CharSequence cs) {
-        return !isBlank(cs);
-    }
-
     public static boolean isBlank(final CharSequence cs) {
         final int strLen = length(cs);
         if (strLen == 0) {

@@ -32,28 +32,4 @@ public final class ModelUtils {
             throw new RuntimeException("cannot create object of type: " + clazz.getName(), e);
         }
     }
-
-    public static Optional<Object> getId(Object entity) {
-        if (entity == null) return Optional.empty();
-
-        Class<?> clazz = entity.getClass();
-
-        for (Field field : clazz.getDeclaredFields()) {
-            for (Annotation a : field.getAnnotations()) {
-                if (a.annotationType() == Id.class) {
-                    field.setAccessible(true);
-                    try {
-                        return Optional.ofNullable(field.get(entity));
-                    } catch (IllegalAccessException e) {
-                        return Optional.empty();
-                    }
-                }
-            }
-        }
-
-        if (clazz.getSuperclass() != Object.class) {
-            return getId(entity);
-        }
-        return Optional.empty();
-    }
 }

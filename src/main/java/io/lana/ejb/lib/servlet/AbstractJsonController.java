@@ -1,9 +1,7 @@
 package io.lana.ejb.lib.servlet;
 
-import io.lana.ejb.lib.pageable.Page;
-import io.lana.ejb.lib.pageable.Pageable;
 import io.lana.ejb.lib.repo.Audited;
-import io.lana.ejb.lib.repo.CrudRepository;
+import io.lana.ejb.lib.repo.JpaRepository;
 import io.lana.ejb.lib.utils.ModelUtils;
 
 import javax.inject.Inject;
@@ -20,12 +18,12 @@ import java.util.Set;
 
 public abstract class AbstractJsonController<T extends Audited<ID>, ID> {
     protected final Class<T> clazz;
-    protected final CrudRepository<T> repo;
+    protected final JpaRepository<T> repo;
 
     @Inject
     protected Validator validator;
 
-    protected AbstractJsonController(CrudRepository<T> repo) {
+    protected AbstractJsonController(JpaRepository<T> repo) {
         this.repo = repo;
         Class<?> originClazz = ModelUtils.getOriginalClass(this);
         this.clazz = ModelUtils.getGenericType(originClazz);
@@ -47,9 +45,8 @@ public abstract class AbstractJsonController<T extends Audited<ID>, ID> {
 
     // No @Produces allow subclass to overwrite for specific type
     @GET
-    public Response index(@BeanParam final Pageable pageable) {
-        Page<T> page = repo.page(pageable);
-        return Response.ok(page).build();
+    public Response index() {
+        return Response.ok(repo.list()).build();
     }
 
     @POST
