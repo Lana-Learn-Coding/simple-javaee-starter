@@ -57,7 +57,7 @@
             },
             error: function (err) {
                 modal.hide();
-                alert(`Cannot view data \${err.status}}`);
+                alert(`Cannot view data \${err.status}`);
             },
             complete: function () {
                 $spinner.remove();
