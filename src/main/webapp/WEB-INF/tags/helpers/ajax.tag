@@ -103,6 +103,17 @@
         return $spinner;
     }
 
+    function formToQuery($form) {
+        const json = formToJson($form);
+        let param = '?';
+        Object.keys(json).forEach((key) => {
+            if (param === '?') param += `\${key}=`;
+            else param += `&\${key}=`
+            param += urlEncode(json[key]);
+        })
+
+        return param === '?' ? '' : param;
+    }
 
     function formToJson($form) {
         const $inputs = $form.find('input,select');
@@ -155,6 +166,10 @@
 
             $input.val(val).change();
         });
+    }
+
+    function urlEncode(val) {
+        return encodeURIComponent(val).replace(/[!'()]/g, escape).replace(/\*/g, "%2A");
     }
 
     function bsModal(selector) {

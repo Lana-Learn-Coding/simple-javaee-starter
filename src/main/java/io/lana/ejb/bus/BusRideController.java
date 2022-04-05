@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -29,7 +30,7 @@ public class BusRideController extends AbstractJsonController<BusRide, Integer> 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response all() {
-        return Response.ok(repo.list()).build();
+    public Response all(@QueryParam("search") String search) {
+        return Response.ok(repo.list("it.name like ?1", "%" + search + "%")).build();
     }
 }

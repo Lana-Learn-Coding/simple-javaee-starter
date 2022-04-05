@@ -21,7 +21,8 @@
     }
 
     function loadData() {
-        loadTable($('table'), { url: '${url}' }, (row) => {
+        const url = '${url}' + formToQuery($('#data-table-query'));
+        loadTable($('table'), { url: url }, (row) => {
             return `
                 <button onclick="doShow(\${row.id}, '#modal-detail')" class="btn btn-primary btn-sm me-1">View</button>
                 <button onclick="doShow(\${row.id}, '#modal-edit')" class="btn btn-primary btn-sm me-1">Edit</button>

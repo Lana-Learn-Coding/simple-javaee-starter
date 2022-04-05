@@ -15,6 +15,18 @@
                 </button>
             </div>
 
+            <div class="d-flex" id="data-table-query">
+                <input type="text"
+                       style="max-width: 300px"
+                       class="form-control form-control-sm"
+                       name="search"
+                       placeholder="Search item"
+                       aria-label="search"
+                       value="${param.search}"
+                       onchange="loadData()">
+                <button class="btn btn-sm btn-primary ms-2" onclick="loadData()">Search</button>
+            </div>
+
             <table class="table" id="data-table">
                 <thead>
                 <tr>
